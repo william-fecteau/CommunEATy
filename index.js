@@ -21,7 +21,7 @@ app.listen(42069, () => {
 });
 
 app.get("/", (req, res) => {
-  let t = getUserByUsername(db, "gamer");
-  console.log(t);
-  res.send();
+  getUserByUsername(db, "gamer", (err, row) => {
+    res.send(row);
+  });
 });
