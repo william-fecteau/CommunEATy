@@ -6,8 +6,8 @@ const demoEvent = {
     //imageUrl: 'https://cdn.discordapp.com/attachments/1040028766228971560/1069011173623738479/restaurant1.jpg',
     name: 'Rabais Spaghetti',
     date: '2023-01-29',
-    ogPrice: 15.00,
-    curPrice: 12.00,
+    ogPrice: 150,
+    curPrice: 12,
     curUsers: 12,
     maxUsers: 20
 };
