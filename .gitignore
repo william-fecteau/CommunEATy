@@ -6,4 +6,4 @@ package-lock.json
 .idea
 
 # sqlite
-data/apptest.db
+database/apptest.db

@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS Events  (
     basePrice MONEY NOT NULL,
     eventDate DATETIME NOT NULL,
     imageUrl VARCHAR(255) NULL,
-    fk_restaurantId INT NULL,
+    fk_restaurantId INT NOT NULL,
     FOREIGN KEY (fk_restaurantId) REFERENCES Restaurants(pk_id)
 );
 
@@ -38,7 +38,3 @@ CREATE TABLE IF NOT EXISTS EventMilestone  (
     fk_eventId INT NOT NULL,
     FOREIGN KEY (fk_eventId) REFERENCES Events(pk_id)
 );
-
-
-
-
