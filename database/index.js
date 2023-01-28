@@ -1,19 +1,31 @@
 const fs = require("fs");
 
-function createTables(db) {
+function _runSqlScript(db, scriptPath) {
   const queries = fs
-    .readFileSync("./database/createTables.sql")
+    .readFileSync(`./database/${scriptPath}`)
     .toString()
     .replace("\n", "")
     .split(";");
 
-  queries.forEach((query) => {
-    db.run((query += ";"), (err) => {
-      if (err) {
-        console.log(err.message);
+  db.serialize(() => {
+    db.run("PRAGMA foreign_keys=OFF;");
+    db.run("BEGIN TRANSACTION;");
+    queries.forEach((query) => {
+      if (query) {
+        db.run(query + ";", (err) => {
+          if (err) {
+            console.log("QUERY FAILED : " + query);
+            throw err;
+          }
+        });
       }
     });
+    db.run("COMMIT;");
   });
+}
+
+function createTables(db) {
+  _runSqlScript(db, "createTables.sql");
 }
 
 const seedDatabase = (db) => {
