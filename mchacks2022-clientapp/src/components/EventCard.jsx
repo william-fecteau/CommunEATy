@@ -1,4 +1,5 @@
 import React from 'react';
+import EventCardProgressBar from "./EventCardProgressBar";
 
 function EventCard({event}) {
     return (
@@ -21,6 +22,7 @@ function EventCard({event}) {
                 </div>
 
             </div>
+            <EventCardProgressBar event={event}/>
 
 
         </div>
