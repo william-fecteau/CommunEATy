@@ -4,3 +4,6 @@ package-lock.json
 *.log
 *.gz
 .idea
+
+# sqlite
+data/apptest.db
