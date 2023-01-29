@@ -4,6 +4,9 @@ import { Icon } from "@iconify/react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import {UserContext} from "../../App";
+import PrimaryButton from "../../components/PrimaryButton";
+import JoinedButton from "../../components/JoinedButton";
+
 
 function EventDetails(props) {
   const { eventId } = useParams();
@@ -48,10 +51,7 @@ function EventDetails(props) {
               <div>{event.description}</div>
             </div>
 
-            <button className="flex items-center w-32 mt-8 bg-primary hover:bg-green-400 pl-10 py-2 hover:shadow rounded font-semibold">
-              <Icon icon={"ic:baseline-plus"} width="16px" />
-              Join
-            </button>
+            <JoinedButton event={event}/>
           </div>
           <div className="flex flex-col w-64 ml-12 items-center justify-center">
             <h1 className="self-center uppercase font-bold text-2xl mb-16">
