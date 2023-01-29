@@ -1,10 +1,14 @@
 import { TextInput, Modal, Label } from "flowbite-react";
-import { Fragment } from "react";
+import { Fragment, useContext, useState } from "react";
 import PrimaryButton from "./PrimaryButton";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../App";
 
 export default function LoginModal({ show, setShow }) {
+  const [username, setUsername] = useState("");
+
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
   return (
     <Fragment>
@@ -20,7 +24,12 @@ export default function LoginModal({ show, setShow }) {
             <div className="mb-2 block">
               <Label htmlFor="username" value="Username" />
             </div>
-            <TextInput id="username" type="text" />
+            <TextInput
+              id="username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
           </div>
           <div className="w-1/2 mb-3">
             <div className="mb-2 block">
@@ -30,7 +39,10 @@ export default function LoginModal({ show, setShow }) {
           </div>
           <PrimaryButton
             onClick={() => {
+              if (username === "") return;
+
               setShow(false);
+              setUser({ username: username });
               navigate("/events");
             }}
           >
