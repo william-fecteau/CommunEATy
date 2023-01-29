@@ -25,11 +25,12 @@ function Events() {
     <div className="flex flex-col px-8 my-8">
       <div className="flex mb-8 ml-4">
         <div className="text-3xl mr-8">Nearby Events</div>
-        <button
-          className="flex items-center bg-green-500 hover:bg-green-400 hover:shadow pl-2 pr-4 rounded font-semibold">
-          <Icon icon={"ic:baseline-plus"} width="32px"/>
+        <Link
+          className="hover:cursor-pointer flex items-center bg-green-500 hover:bg-green-400 hover:shadow pl-2 pr-4 rounded font-semibold"
+          to="/create-event">
+          <Icon icon="ic:baseline-plus" width="32px"/>
           Event
-        </button>
+        </Link>
       </div>
       <div className="flex flex-wrap max-w-6xl">
         {events.map(event => (
