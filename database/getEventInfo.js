@@ -32,3 +32,6 @@ function getEvents(bd, callback) {
   let query = "SELECT * FROM Events;";
   bd.all(query, [], callback);
 }
+module.exports = {
+  getEvents,
+};

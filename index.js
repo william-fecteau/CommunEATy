@@ -1,9 +1,10 @@
 const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
-const { createTables, seedData } = require("./database");
-const { getUserByUsername } = require("./database/userDto");
-const { getNumOfUsersInEvent, getMilestones, getDeltaPrice } = require("./database/getEventInfo");
+const {createTables, seedData} = require("./database");
+const {getUserByUsername} = require("./database/userDto");
+const {getEvents} = require("./database/getEventInfo");
+const {getNumOfUsersInEvent, getMilestones, getDeltaPrice} = require("./database/getEventInfo");
 const cors = require("cors");
 const db_name = path.join(__dirname, "database", "apptest.db");
 const db = new sqlite3.Database(db_name, (err) => {
@@ -40,19 +41,18 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.all("/events", (req, res) => {
-  res.send("Hello World!");
-  // console.log("GET /events");
-  // let events = [];
-  // getEvents(db, (err, rows) => {
-  //   if (err) {
-  //     throw err;
-  //   }
-  //   for (row in rows) {
-  //     events.push(row);
-  //   }
-  // });
-  // res.send(events);
+app.get("/events", (req, res) => {
+  console.log("GET /events");
+  let events = [];
+  getEvents(db, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    for (row in rows) {
+      events.push(row);
+    }
+  });
+  res.send(events);
 });
 
 app.get("/usersInEvent", (req, res) => {
@@ -79,7 +79,9 @@ app.get("/milestones", (req, res) => {
 
 app.get("/cost", (req, res) => {
   let deltaPrice = null
-  getDeltaPrice(db, req.eventId, (err, rows) => {deltaPrice = rows;});
+  getDeltaPrice(db, req.eventId, (err, rows) => {
+    deltaPrice = rows;
+  });
   res.send(deltaPrice);
 });
 
