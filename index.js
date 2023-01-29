@@ -3,7 +3,7 @@ const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
 const { createTables, seedData } = require("./database");
 const { getUserByUsername } = require("./database/userDto");
-
+const cors = require("cors");
 const db_name = path.join(__dirname, "database", "apptest.db");
 const db = new sqlite3.Database(db_name, (err) => {
   if (err) {
@@ -24,12 +24,14 @@ db.all("SELECT * FROM Users;",(err, rows ) => {
 
 const app = express();
 
+app.use(cors({
+  origin: "*",
+}));
+
 app.listen(42069, () => {
   console.log("Server started (http://localhost:42069/)! Haha xd so funny");
 });
 
 app.get("/", (req, res) => {
-  getUserByUsername(db, "gamer", (err, row) => {
-    res.send(row);
-  });
+  res.send("Hello World!");
 });

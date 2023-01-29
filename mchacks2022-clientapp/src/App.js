@@ -1,3 +1,4 @@
+import axios from "axios";
 import "./App.css";
 import Layout from "./views/Layout";
 import { Routes, Route } from "react-router-dom";
@@ -7,11 +8,14 @@ import Events from "./views/events/Events";
 import EventDetails from "./views/event-details/EventDetails";
 import { useState, createContext } from "react";
 
+// axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+axios.defaults.baseURL = "http://localhost:42069";
+
+axios.get("/").then((res) => console.log(res.data));
 export const UserContext = createContext();
 
 function App() {
   const [user, setUser] = useState({ username: null });
-
   return (
     <>
       <UserContext.Provider value={{ user, setUser }}>
