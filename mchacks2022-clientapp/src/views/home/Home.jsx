@@ -8,8 +8,8 @@ function Home() {
 
   return (
     <>
-      <div className="flex">
-        <div className="flex flex-col mr-32">
+      <div className="flex w-full justify-center">
+        <div className="flex flex-col mx-32">
           <div className="flex flex-col flex-wrap mt-8">
             <div className="font-extrabold text-4xl">
               Eat and Save,

@@ -9,6 +9,11 @@ module.exports = {
       primary: "#49E36D",
       navGreen: "#3B824C",
     },
+    extend: {
+      rotate: {
+        '270': '270deg',
+      }
+    }
   },
   plugins: [require("flowbite/plugin")],
 };

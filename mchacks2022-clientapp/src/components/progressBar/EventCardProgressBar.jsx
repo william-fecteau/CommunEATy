@@ -2,7 +2,7 @@ import React from 'react';
 import Milestone from "./Milestone";
 import CurrentProgress from "./CurrentProgress";
 
-function EventCardProgressBar({event}) {
+function EventCardProgressBar({event, rotated = false}) {
   const progressBarTotalWidth = 150;
   const milestoneWidth = 10;
   const firstMilestoneOffset = 50;
@@ -25,13 +25,27 @@ function EventCardProgressBar({event}) {
   }());
 
   return (
-    <div style={{width: `${progressBarTotalWidth}px`, height: "10px"}}
-         className="relative bg-gray-200 ml-auto mr-auto rounded-full">
-      <CurrentProgress progressWidth={progressWidth}/>
-      <Milestone width={milestoneWidth} leftOffset={50}
-                 colorClass={firstMilestoneAcheived ? acheivedMilestoneColor : notAcheivedMilestoneColor}/>
-      <Milestone width={milestoneWidth} leftOffset={100}
-                 colorClass={secondMilestoneAcheived ? acheivedMilestoneColor : notAcheivedMilestoneColor}/>
+    <div className='flex items-center'>
+      <div>
+        {rotated && <h1 className="rotate-90">{ event.curUsers } / { event.maxUsers }</h1>}
+      </div>
+      <div style={{width: `${progressBarTotalWidth}px`, height: "10px"}}
+           className="relative bg-gray-200 ml-auto mr-auto rounded-full">
+        <CurrentProgress progressWidth={progressWidth}/>
+        <Milestone width={milestoneWidth} leftOffset={50}
+                   rotated={rotated}
+                   milestone={event.milestones[0]}
+                   colorClass={firstMilestoneAcheived ? acheivedMilestoneColor : notAcheivedMilestoneColor}/>
+        <Milestone width={milestoneWidth} leftOffset={100}
+                   rotated={rotated}
+                   milestone={event.milestones[1]}
+                   colorClass={secondMilestoneAcheived ? acheivedMilestoneColor : notAcheivedMilestoneColor}/>
+      </div>
+      <div>
+        {rotated && <h1 className="rotate-90 font-bold line-through">{(event.ogPrice).toLocaleString('en-US', {
+            minimumFractionDigits: 2
+        })}</h1>}
+      </div>
     </div>
   );
 }
