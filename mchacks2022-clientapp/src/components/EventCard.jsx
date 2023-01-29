@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 import EventCardProgressBar from "./progressBar/EventCardProgressBar";
-import { UserContext } from "../App";
+import {UserContext} from "../App";
 import axios from "axios";
 import PrimaryButton from "./PrimaryButton";
 import JoinedButton from "./JoinedButton";
 
-function EventCard({ event }) {
-  const { user } = useContext(UserContext);
+function EventCard({event}) {
+  const {user} = useContext(UserContext);
 
   return (
     <div className="m-4 w-56 bg-gray-50 hover:shadow-lg cursor-pointer h-96 rounded-lg flex flex-col">
@@ -42,16 +42,16 @@ function EventCard({ event }) {
         </div>
       </div>
       <div className="mx-4">
-        <EventCardProgressBar event={event} />
+        <EventCardProgressBar event={event}/>
       </div>
-      <div flex flex-row justify-between className="mx-4">
+      <div className="mx-4 flex flex-row justify-between">
         {event.nbFriendsGoing > 0
           ? `${event.nbFriendsGoing} friend(s) going`
           : "."}
       </div>
 
       <div className="self-center">
-        <JoinedButton event={event} />
+        <JoinedButton event={event}/>
       </div>
     </div>
   );

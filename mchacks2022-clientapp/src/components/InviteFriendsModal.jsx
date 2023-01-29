@@ -47,8 +47,14 @@ function InviteFriendsModal({show, setShow}) {
               <div
                 className={`flex justify-between self-center text-lg ${friendIdsInvitationSent.includes(friend.pk_id) ? "text-gray-500 cursor-not-allowed" : ""}`}>
                 <span className="">{friend.username}</span>
-                <button onClick={() => handleInvitationSent(friend.pk_id)} className="bg-primary hover:bg-green-400 hover:shadow"><Icon
-                  icon="material-symbols:outgoing-mail-outline" width="24px"/></button>
+                <button onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  handleInvitationSent(friend.pk_id)
+                }}
+                        className={`${friendIdsInvitationSent.includes(friend.pk_id) ? "text-gray-500 cursor-default" : "text-primary"}`}>
+                  <Icon
+                    icon="material-symbols:outgoing-mail-outline" width="24px"/></button>
               </div>
             ))}
           </div>

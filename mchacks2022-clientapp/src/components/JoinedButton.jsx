@@ -27,7 +27,9 @@ function JoinedButton({event}) {
         </PrimaryButton>
         :
         <PrimaryButton
-          onClick={async () => {
+          onClick={async (e) => {
+            e.stopPropagation();
+            e.preventDefault();
             if (user.username === "") return;
             setShowInviteFriendsModal(true)
             setEventJustJoined(true)

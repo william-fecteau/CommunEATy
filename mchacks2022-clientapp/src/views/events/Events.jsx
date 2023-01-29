@@ -35,7 +35,9 @@ function Events() {
       </div>
       <div className="flex flex-wrap max-w-6xl">
         {events.map((event) => (
-          <EventCard key={event.pk_id} event={event}/>
+          <Link key={event.pk_id} to={"/events/" + event.pk_id}>
+            <EventCard key={event.pk_id} event={event}/>
+          </Link>
         ))}
       </div>
     </div>
