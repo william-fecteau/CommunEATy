@@ -44,7 +44,7 @@ function EventCard({ event }) {
       <div className="mx-4">
         <EventCardProgressBar event={event} />
       </div>
-      <div flex flex-row justify-between className="mx-4">
+      <div className="flex flex-row justify-between mx-4">
         {event.nbFriendsGoing > 0
           ? `${event.nbFriendsGoing} friend(s) going`
           : "."}

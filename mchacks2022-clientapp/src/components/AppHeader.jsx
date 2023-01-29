@@ -51,7 +51,7 @@ export default function AppHeader() {
             </div>
             <div
               className="text-navGreen text-base cursor-pointer hover:text-primary"
-              onClick={() => {}}
+              onClick={() => navigate("/joined")}
             >
               <Icon icon="carbon:checkmark" className="inline mr-1" />
               Joined
