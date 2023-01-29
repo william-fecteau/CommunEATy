@@ -1,7 +1,11 @@
 import { Icon } from "@iconify/react";
+import LoginModal from "./LoginModal";
+import { useState } from "react";
 import {Link} from "react-router-dom";
 
 export default function AppHeader() {
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
   return (
     <>
       <nav
@@ -13,13 +17,13 @@ export default function AppHeader() {
         </Link>
         <div
           className="text-navGreen text-base cursor-pointer hover:text-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
+          onClick={() => setShowLoginModal(true)}
         >
           <Icon icon="material-symbols:login" className="inline mr-1" />
           Login
         </div>
       </nav>
+      <LoginModal show={showLoginModal} setShow={setShowLoginModal} />
     </>
   );
 }

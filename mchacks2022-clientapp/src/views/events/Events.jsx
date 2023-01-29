@@ -1,82 +1,90 @@
-import React from 'react';
-import {Icon} from "@iconify/react";
+import React, { useContext } from "react";
+import { Icon } from "@iconify/react";
 import EventCard from "../../components/EventCard";
 import {Link} from "react-router-dom";
 
 const events = [
-    {
-        imageUrl: 'https://image.similarpng.com/very-thumbnail/2020/06/Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png',
-        name: 'Rabais Spaghetti',
-        date: '2023-01-29',
-        ogPrice: 150,
-        curPrice: 12,
-        curUsers: 12,
-        maxUsers: 20
-    },
-    {
-        imageUrl: 'https://cdn.discordapp.com/attachments/1040028766228971560/1069011173623738479/restaurant1.jpg',
-        name: 'Rabais Spaghetti',
-        date: '2023-01-29',
-        ogPrice: 150,
-        curPrice: 12,
-        curUsers: 12,
-        maxUsers: 20
-    },
-    {
-        imageUrl: 'https://image.similarpng.com/very-thumbnail/2020/06/Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png',
-        name: 'Rabais Spaghetti',
-        date: '2023-01-29',
-        ogPrice: 150,
-        curPrice: 12,
-        curUsers: 12,
-        maxUsers: 20
-    },
-    {
-        imageUrl: 'https://cdn.discordapp.com/attachments/1040028766228971560/1069011173623738479/restaurant1.jpg',
-        name: 'Rabais Spaghetti',
-        date: '2023-01-29',
-        ogPrice: 150,
-        curPrice: 12,
-        curUsers: 12,
-        maxUsers: 20
-    },
-    {
-        imageUrl: 'https://image.similarpng.com/very-thumbnail/2020/06/Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png',
-        name: 'Rabais Spaghetti',
-        date: '2023-01-29',
-        ogPrice: 150,
-        curPrice: 12,
-        curUsers: 12,
-        maxUsers: 20
-    },
-    {
-        imageUrl: 'https://cdn.discordapp.com/attachments/1040028766228971560/1069011173623738479/restaurant1.jpg',
-        name: 'Rabais Spaghetti',
-        date: '2023-01-29',
-        ogPrice: 150,
-        curPrice: 12,
-        curUsers: 12,
-        maxUsers: 20
-    },
-    {
-        imageUrl: 'https://image.similarpng.com/very-thumbnail/2020/06/Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png',
-        name: 'Rabais Spaghetti',
-        date: '2023-01-29',
-        ogPrice: 150,
-        curPrice: 12,
-        curUsers: 12,
-        maxUsers: 20
-    },
-    {
-        imageUrl: 'https://cdn.discordapp.com/attachments/1040028766228971560/1069011173623738479/restaurant1.jpg',
-        name: 'Rabais Spaghetti',
-        date: '2023-01-29',
-        ogPrice: 150,
-        curPrice: 12,
-        curUsers: 12,
-        maxUsers: 20
-    }
-]
+  {
+    imageUrl:
+      "https://image.similarpng.com/very-thumbnail/2020/06/Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png",
+    name: "Rabais Spaghetti",
+    date: "2023-01-29",
+    ogPrice: 150,
+    curPrice: 12,
+    curUsers: 12,
+    maxUsers: 20,
+  },
+  {
+    imageUrl:
+      "https://cdn.discordapp.com/attachments/1040028766228971560/1069011173623738479/restaurant1.jpg",
+    name: "Rabais Spaghetti",
+    date: "2023-01-29",
+    ogPrice: 150,
+    curPrice: 12,
+    curUsers: 12,
+    maxUsers: 20,
+  },
+  {
+    imageUrl:
+      "https://image.similarpng.com/very-thumbnail/2020/06/Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png",
+    name: "Rabais Spaghetti",
+    date: "2023-01-29",
+    ogPrice: 150,
+    curPrice: 12,
+    curUsers: 12,
+    maxUsers: 20,
+  },
+  {
+    imageUrl:
+      "https://cdn.discordapp.com/attachments/1040028766228971560/1069011173623738479/restaurant1.jpg",
+    name: "Rabais Spaghetti",
+    date: "2023-01-29",
+    ogPrice: 150,
+    curPrice: 12,
+    curUsers: 12,
+    maxUsers: 20,
+  },
+  {
+    imageUrl:
+      "https://image.similarpng.com/very-thumbnail/2020/06/Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png",
+    name: "Rabais Spaghetti",
+    date: "2023-01-29",
+    ogPrice: 150,
+    curPrice: 12,
+    curUsers: 12,
+    maxUsers: 20,
+  },
+  {
+    imageUrl:
+      "https://cdn.discordapp.com/attachments/1040028766228971560/1069011173623738479/restaurant1.jpg",
+    name: "Rabais Spaghetti",
+    date: "2023-01-29",
+    ogPrice: 150,
+    curPrice: 12,
+    curUsers: 12,
+    maxUsers: 20,
+  },
+  {
+    imageUrl:
+      "https://image.similarpng.com/very-thumbnail/2020/06/Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png",
+    name: "Rabais Spaghetti",
+    date: "2023-01-29",
+    ogPrice: 150,
+    curPrice: 12,
+    curUsers: 12,
+    maxUsers: 20,
+  },
+  {
+    imageUrl:
+      "https://cdn.discordapp.com/attachments/1040028766228971560/1069011173623738479/restaurant1.jpg",
+    name: "Rabais Spaghetti",
+    date: "2023-01-29",
+    ogPrice: 150,
+    curPrice: 12,
+    curUsers: 12,
+    maxUsers: 20,
+  },
+];
 
 function Events(props) {
     return (
