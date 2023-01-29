@@ -1,4 +1,5 @@
 import React from 'react';
+import EventCardProgressBar from "./progressBar/EventCardProgressBar";
 
 function EventCard({event}) {
     return (
@@ -31,8 +32,7 @@ function EventCard({event}) {
                     </div>
                 </div>
                 <div className="mx-4">
-                    TODO <br/>
-                    Progress bar goes here
+                    <EventCardProgressBar event={event}/>
                 </div>
                 <div className="self-center mt-8 border-black border-2 rounded-full px-12 hover:bg-gray-200 font-bold">
                     Join

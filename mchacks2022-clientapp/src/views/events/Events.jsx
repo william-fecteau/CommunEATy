@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Icon } from "@iconify/react";
+import React, {useContext} from "react";
+import {Icon} from "@iconify/react";
 import EventCard from "../../components/EventCard";
 import {Link} from "react-router-dom";
 
@@ -11,8 +11,25 @@ const events = [
     date: "2023-01-29",
     ogPrice: 150,
     curPrice: 12,
-    curUsers: 12,
-    maxUsers: 20,
+    curUsers: 22,
+    maxUsers: 30,
+    milestones: [
+      {
+        minNbUsers: 10,
+        priceDiscount: 0.99
+      },
+      {
+        minNbUsers: 15,
+        priceDiscount: 1.99
+      },
+      {
+        minNbUsers: 20,
+        priceDiscount: 2.99
+      },
+      {
+        minNbUsers: 25,
+        priceDiscount: 3.99
+      }]
   },
   {
     imageUrl:
@@ -21,8 +38,25 @@ const events = [
     date: "2023-01-29",
     ogPrice: 150,
     curPrice: 12,
-    curUsers: 12,
-    maxUsers: 20,
+    curUsers: 5,
+    maxUsers: 30,
+    milestones: [
+      {
+        minNbUsers: 10,
+        priceDiscount: 0.99
+      },
+      {
+        minNbUsers: 15,
+        priceDiscount: 1.99
+      },
+      {
+        minNbUsers: 20,
+        priceDiscount: 2.99
+      },
+      {
+        minNbUsers: 25,
+        priceDiscount: 3.99
+      }]
   },
   {
     imageUrl:
@@ -31,8 +65,25 @@ const events = [
     date: "2023-01-29",
     ogPrice: 150,
     curPrice: 12,
-    curUsers: 12,
-    maxUsers: 20,
+    curUsers: 29,
+    maxUsers: 30,
+    milestones: [
+      {
+        minNbUsers: 10,
+        priceDiscount: 0.99
+      },
+      {
+        minNbUsers: 15,
+        priceDiscount: 1.99
+      },
+      {
+        minNbUsers: 20,
+        priceDiscount: 2.99
+      },
+      {
+        minNbUsers: 25,
+        priceDiscount: 3.99
+      }]
   },
   {
     imageUrl:
@@ -41,8 +92,25 @@ const events = [
     date: "2023-01-29",
     ogPrice: 150,
     curPrice: 12,
-    curUsers: 12,
-    maxUsers: 20,
+    curUsers: 11,
+    maxUsers: 30,
+    milestones: [
+      {
+        minNbUsers: 10,
+        priceDiscount: 0.99
+      },
+      {
+        minNbUsers: 15,
+        priceDiscount: 1.99
+      },
+      {
+        minNbUsers: 20,
+        priceDiscount: 2.99
+      },
+      {
+        minNbUsers: 25,
+        priceDiscount: 3.99
+      }]
   },
   {
     imageUrl:
@@ -51,8 +119,25 @@ const events = [
     date: "2023-01-29",
     ogPrice: 150,
     curPrice: 12,
-    curUsers: 12,
-    maxUsers: 20,
+    curUsers: 17,
+    maxUsers: 30,
+    milestones: [
+      {
+        minNbUsers: 10,
+        priceDiscount: 0.99
+      },
+      {
+        minNbUsers: 15,
+        priceDiscount: 1.99
+      },
+      {
+        minNbUsers: 20,
+        priceDiscount: 2.99
+      },
+      {
+        minNbUsers: 25,
+        priceDiscount: 3.99
+      }]
   },
   {
     imageUrl:
@@ -61,8 +146,25 @@ const events = [
     date: "2023-01-29",
     ogPrice: 150,
     curPrice: 12,
-    curUsers: 12,
-    maxUsers: 20,
+    curUsers: 3,
+    maxUsers: 30,
+    milestones: [
+      {
+        minNbUsers: 10,
+        priceDiscount: 0.99
+      },
+      {
+        minNbUsers: 15,
+        priceDiscount: 1.99
+      },
+      {
+        minNbUsers: 20,
+        priceDiscount: 2.99
+      },
+      {
+        minNbUsers: 25,
+        priceDiscount: 3.99
+      }]
   },
   {
     imageUrl:
@@ -71,8 +173,25 @@ const events = [
     date: "2023-01-29",
     ogPrice: 150,
     curPrice: 12,
-    curUsers: 12,
-    maxUsers: 20,
+    curUsers: 28,
+    maxUsers: 30,
+    milestones: [
+      {
+        minNbUsers: 10,
+        priceDiscount: 0.99
+      },
+      {
+        minNbUsers: 15,
+        priceDiscount: 1.99
+      },
+      {
+        minNbUsers: 20,
+        priceDiscount: 2.99
+      },
+      {
+        minNbUsers: 25,
+        priceDiscount: 3.99
+      }]
   },
   {
     imageUrl:
@@ -81,31 +200,49 @@ const events = [
     date: "2023-01-29",
     ogPrice: 150,
     curPrice: 12,
-    curUsers: 12,
-    maxUsers: 20,
+    curUsers: 6,
+    maxUsers: 30,
+    milestones: [
+      {
+        minNbUsers: 10,
+        priceDiscount: 0.99
+      },
+      {
+        minNbUsers: 15,
+        priceDiscount: 1.99
+      },
+      {
+        minNbUsers: 20,
+        priceDiscount: 2.99
+      },
+      {
+        minNbUsers: 25,
+        priceDiscount: 3.99
+      }]
   },
 ];
 
 function Events(props) {
-    return (
-        <div className="flex flex-col px-8 my-8">
-            <div className="flex mb-8 ml-4">
-                <div className="text-3xl mr-8">Nearby Events</div>
-                <button className="flex items-center bg-green-500 hover:bg-green-400 hover:shadow pl-2 pr-4 rounded font-semibold">
-                    <Icon icon={"ic:baseline-plus"} width="32px"/>
-                    Event
-                </button>
-            </div>
-            <div className="flex flex-wrap max-w-6xl">
-                {events.map(event => (
-                    <Link to='/details'>
-                        <EventCard event={event}/>
-                    </Link>
-                     ))}
-            </div>
+  return (
+    <div className="flex flex-col px-8 my-8">
+      <div className="flex mb-8 ml-4">
+        <div className="text-3xl mr-8">Nearby Events</div>
+        <button
+          className="flex items-center bg-green-500 hover:bg-green-400 hover:shadow pl-2 pr-4 rounded font-semibold">
+          <Icon icon={"ic:baseline-plus"} width="32px"/>
+          Event
+        </button>
+      </div>
+      <div className="flex flex-wrap max-w-6xl">
+        {events.map(event => (
+          <Link to='/details'>
+            <EventCard event={event}/>
+          </Link>
+        ))}
+      </div>
 
-        </div>
-    );
+    </div>
+  );
 }
 
 export default Events;
