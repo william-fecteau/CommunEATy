@@ -28,17 +28,13 @@ function createTables(db) {
   _runSqlScript(db, "createTables.sql");
 }
 
-const seedDatabase = (db) => {
-  db.run(seedUsersTable, (err) => {
-    if (err) {
-      console.log(err.message);
-    } else {
-      console.log("Table users seeded");
-    }
-  });
-};
+
+function seedData(db) {
+  _runSqlScript(db, "seedData.sql");
+}
+
 
 module.exports = {
   createTables,
-  seedDatabase,
+  seedData,
 };
