@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 import LoginModal from "./LoginModal";
 import { useState } from "react";
+import {Link} from "react-router-dom";
 
 export default function AppHeader() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -11,9 +12,9 @@ export default function AppHeader() {
         style={{ fontFamily: "Poppins" }}
         className="font-semibold text-2xl flex justify-between align-middle p-4"
       >
-        <div>
+        <Link className="hover:cursor-pointer" to="/">
           Commun<span className="text-primary">EAT</span>y
-        </div>
+        </Link>
         <div
           className="text-navGreen text-base cursor-pointer hover:text-primary"
           onClick={() => setShowLoginModal(true)}

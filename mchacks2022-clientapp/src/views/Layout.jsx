@@ -1,12 +1,11 @@
 import React from "react";
-import { Icon } from "@iconify/react";
 import AppHeader from "../components/AppHeader";
 
 function Layout({ children }) {
   return (
-    <div className="flex-row h-full">
+    <div className="flex flex-col h-full">
       <AppHeader />
-      <div className="min-h-full">{children}</div>
+      <div className="min-h-full px-2 max-w-4xl self-center">{children}</div>
     </div>
   );
 }
