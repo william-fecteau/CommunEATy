@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Icon } from "@iconify/react";
+import React, {useContext} from "react";
+import {Icon} from "@iconify/react";
 import EventCard from "../../components/EventCard";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -269,7 +269,7 @@ function Events(props) {
       <div className="flex flex-wrap max-w-6xl">
         {events.map(event => (
           <Link to='/details'>
-            <EventCard event={event} />
+            <EventCard event={event}/>
           </Link>
         ))}
       </div>

@@ -1,40 +1,47 @@
-import React from 'react';
-import EventCard from "../../components/EventCard";
-
-const demoEvent = {
-  imageUrl: 'https://image.similarpng.com/very-thumbnail/2020/06/Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png',
-  //imageUrl: 'https://cdn.discordapp.com/attachments/1040028766228971560/1069011173623738479/restaurant1.jpg',
-  name: 'Rabais Spaghetti',
-  date: '2023-01-29',
-  ogPrice: 15.00,
-  curPrice: 12.00,
-  curUsers: 12,
-  maxUsers: 30,
-  milestones: [
-    {
-      minNbUsers: 10,
-      priceDiscount: 0.99
-    },
-    {
-      minNbUsers: 15,
-      priceDiscount: 1.99
-    },
-    {
-      minNbUsers: 20,
-      priceDiscount: 2.99
-    },
-    {
-      minNbUsers: 25,
-      priceDiscount: 3.99
-    }]
-};
+import React from "react";
+import PrimaryButton from "../../components/PrimaryButton";
+import LoginModal from "../../components/LoginModal";
+import { useState } from "react";
 
 function Home() {
-    return (
-        <div class="flex flex-col items-center">
-            <div class="text-3xl font-bold underline text-red-500">Yahoo</div>
-            <EventCard event={demoEvent}/>
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  return (
+    <>
+      <div className="flex">
+        <div className="flex flex-col mr-32">
+          <div className="flex flex-col flex-wrap mt-8">
+            <div className="font-extrabold text-4xl">
+              Eat and Save,
+              <br />
+              Together 😎
+            </div>
+            <div className="mt-8">
+              Save money 💸 <br />
+              Discover new cuisines 🧑‍🍳 <br />
+              Meet new people 🤝 <br />
+            </div>
+          </div>
+
+          <PrimaryButton
+            onClick={() => {
+              setShowLoginModal(true);
+            }}
+          >
+            Let's eat
+          </PrimaryButton>
         </div>
-    );
+        <img
+          className="self-center"
+          style={{ width: "512px" }}
+          alt="Good food is considered to be nutritious and flavorful, made with high-quality ingredients and prepared in a way that enhances their natural taste. It is often cooked with care and attention to detail, and is visually appealing as well. Additionally, good food should be free of harmful ingredients and should be consumed in moderation as part of a balanced diet."
+          src={
+            "https://cdn.discordapp.com/attachments/482569552933289984/1069090172131627128/test.png"
+          }
+        />
+      </div>
+      <LoginModal show={showLoginModal} setShow={setShowLoginModal} />
+    </>
+  );
 }
 export default Home;

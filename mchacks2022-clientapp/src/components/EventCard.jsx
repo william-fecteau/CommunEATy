@@ -26,9 +26,9 @@ function EventCard({event}) {
                         })}</div>
                     </div>
 
-                    <div class="flex flex-row justify-between">
-                        <div class="font-bold">Date</div>
-                        <div class="uppercase ml-2">{event.date}</div>
+                    <div className="flex flex-row justify-between">
+                        <div className="font-bold">Date</div>
+                        <div className="uppercase ml-2">{event.date}</div>
                     </div>
                 </div>
                 <div className="mx-4">

@@ -1,12 +1,14 @@
 import { Icon } from "@iconify/react";
 import LoginModal from "./LoginModal";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 
 export default function AppHeader() {
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -30,7 +32,7 @@ export default function AppHeader() {
           <div className="flex gap-16">
             <div
               className="text-navGreen text-base cursor-pointer hover:text-primary"
-              onClick={() => setShowLoginModal(true)}
+              onClick={() => navigate("/events")}
             >
               <Icon
                 icon="material-symbols:event-available-outline-rounded"
@@ -40,17 +42,20 @@ export default function AppHeader() {
             </div>
             <div
               className="text-navGreen text-base cursor-pointer hover:text-primary"
-              onClick={() => setShowLoginModal(true)}
+              onClick={() => {}}
             >
               <Icon icon="carbon:checkmark" className="inline mr-1" />
               Joined
             </div>
             <div
               className="text-navGreen text-base cursor-pointer hover:text-primary"
-              onClick={() => setShowLoginModal(true)}
+              onClick={() => {
+                setUser({ username: null });
+                navigate("/");
+              }}
             >
               <Icon icon="bi:people-circle" className="inline mr-1" />
-              Account
+              {user.username}
             </div>
           </div>
         )}
