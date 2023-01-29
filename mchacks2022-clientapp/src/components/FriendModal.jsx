@@ -9,6 +9,10 @@ export default function FriendModal({ show, setShow }) {
 
   const { user, setUser } = useContext(UserContext);
 
+  useEffect(() => {
+    setFriendName("");
+  }, [show]);
+
   return (
     <Fragment>
       <Modal
@@ -34,12 +38,13 @@ export default function FriendModal({ show, setShow }) {
 
           <PrimaryButton
             onClick={async () => {
+              setShow(false);
               axios
                 .get(`/friends/${user.pk_id}/${friendName}`)
                 .then((res) => {});
             }}
           >
-            Ajouter en ami
+            Add friend
           </PrimaryButton>
         </Modal.Body>
       </Modal>
