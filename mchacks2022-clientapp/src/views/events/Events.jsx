@@ -87,7 +87,7 @@ function Events(props) {
                     Event
                 </button>
             </div>
-            <div class="flex flex-wrap max-w-6xl">
+            <div className="flex flex-wrap max-w-6xl">
                 {events.map(event => (<EventCard event={event}/> ))}
             </div>
 
