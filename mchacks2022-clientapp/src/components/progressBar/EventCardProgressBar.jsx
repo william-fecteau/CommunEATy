@@ -45,6 +45,10 @@ function EventCardProgressBar({event, rotated = false}) {
         {rotated && <h1 className="rotate-90 font-bold line-through">{(event.ogPrice).toLocaleString('en-US', {
             minimumFractionDigits: 2
         })}</h1>}
+        <h1>&emsp;</h1>
+        {rotated && <h1 className="rotate-90 font-bold text-red-500">{(event.curPrice).toLocaleString('en-US', {
+            minimumFractionDigits: 2
+        })}</h1>}
       </div>
     </div>
   );

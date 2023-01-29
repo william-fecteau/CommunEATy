@@ -44,7 +44,7 @@ function EventCard({ event }) {
       <div className="mx-4">
         <EventCardProgressBar event={event} />
       </div>
-      <div>YO ! {event.nbFriendsGoing} FRIENDS GOING</div>
+      {event.nbFriendsGoing > 0 && <div flex flex-row justify-between>{event.nbFriendsGoing} FRIENDS GOING</div>}
 
       <div className="self-center">
         <JoinedButton event={event} />
