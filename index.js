@@ -1,11 +1,12 @@
 const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
-const {createTables, seedData} = require("./database");
-const {getUserByUsername} = require("./database/userDto");
-const {getEvents} = require("./database/getEventInfo");
-const {getNumOfUsersInEvent, getMilestones, getDeltaPrice} = require("./database/getEventInfo");
 const cors = require("cors");
+
+const { createTables, seedData } = require("./database");
+const { getUserByUsername } = require("./database/userDto");
+const { getFullEventsAsync } = require("./database/eventDto");
+
 const db_name = path.join(__dirname, "database", "apptest.db");
 const db = new sqlite3.Database(db_name, (err) => {
   if (err) {
@@ -16,7 +17,7 @@ const db = new sqlite3.Database(db_name, (err) => {
 
 createTables(db);
 
-db.all("SELECT * FROM Users;",(err, rows ) => {
+db.all("SELECT * FROM Users;", (err, rows) => {
   if (err) {
     throw err;
   }
@@ -27,9 +28,11 @@ db.all("SELECT * FROM Users;",(err, rows ) => {
 
 const app = express();
 
-app.use(cors({
-  origin: "*",
-}));
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.use(express.json());
 
@@ -41,48 +44,9 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.get("/events", (req, res) => {
-  console.log("GET /events");
-  let events = [];
-  getEvents(db, (err, rows) => {
-    if (err) {
-      throw err;
-    }
-    for (row in rows) {
-      events.push(row);
-    }
-  });
-  res.send(events);
-});
-
-app.get("/usersInEvent", (req, res) => {
-  getNumOfUsersInEvent(db, req.eventId, (err, row) => {
-    res.send(row);
-  });
-});
-
-app.get("/milestones", (req, res) => {
-  let milestones = [];
-  getMilestones(bd, eventId, (err, rows) => {
-    if (err) {
-      throw err;
-    }
-    for (milestoneRow in rows) {
-      milestones.push({
-        minNbUsers: milestoneRow.minNbUsers,
-        priceDiscount: milestoneRow.priceDiscount
-      });
-    }
-  });
-  res.send(milestones);
-});
-
-app.get("/cost", (req, res) => {
-  let deltaPrice = null
-  getDeltaPrice(db, req.eventId, (err, rows) => {
-    deltaPrice = rows;
-  });
-  res.send(deltaPrice);
+app.get("/events", async (req, res) => {
+  let fullEvents = await getFullEventsAsync(db);
+  return res.status(200).send(fullEvents);
 });
 
 app.post("/login", (req, res) => {
@@ -97,4 +61,4 @@ app.post("/login", (req, res) => {
       res.status(200).send(user);
     }
   });
-})
+});
