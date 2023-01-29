@@ -234,8 +234,8 @@ function Events(props) {
         </button>
       </div>
       <div className="flex flex-wrap max-w-6xl">
-        {events.map(event => (
-          <Link to='/details'>
+        {events.map((event, index) => (
+          <Link key={index} to='/details'>
             <EventCard event={event}/>
           </Link>
         ))}
