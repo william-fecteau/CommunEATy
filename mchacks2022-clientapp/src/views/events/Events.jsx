@@ -79,7 +79,7 @@ const events = [
 
 function Events(props) {
     return (
-        <div className="flex flex-col px-8 my-8 items-center">
+        <div className="flex flex-col px-8 my-8">
             <div className="flex mb-8 ml-4">
                 <div className="text-3xl mr-8">Nearby Events</div>
                 <button className="flex items-center bg-green-500 hover:bg-green-400 hover:shadow pl-2 pr-4 rounded font-semibold">

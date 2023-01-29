@@ -5,6 +5,7 @@ import Home from "./views/home/Home";
 import Welcome from "./views/welcome/Welcome";
 import Login from "./views/login/Login";
 import Events from "./views/events/Events";
+import EventDetails from "./views/event-details/EventDetails";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/login" element={<Login />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/details" element={<EventDetails />} />
         </Routes>
       </Layout>
     </>
