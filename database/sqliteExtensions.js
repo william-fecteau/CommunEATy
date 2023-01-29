@@ -20,7 +20,19 @@ async function dbGet(db, query, params = []) {
   });
 }
 
+async function dbRun(db, query, params = []) {
+  return new Promise(function (resolve, reject) {
+    db.run(query, params, function (err, row) {
+      if (err) {
+        return reject(err);
+      }
+      resolve(row);
+    });
+  });
+}
+
 module.exports = {
   dbAll,
   dbGet,
+  dbRun
 };

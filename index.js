@@ -8,6 +8,7 @@ const { getUserByUsername } = require("./database/userDto");
 const {
   getFullEventsAsync,
   getFullEventAsync,
+  joinEventAsync
 } = require("./database/eventDto");
 
 const db_name = path.join(__dirname, "database", "apptest.db");
@@ -70,3 +71,12 @@ app.post("/login", (req, res) => {
     }
   });
 });
+
+app.post("/joinEvent", async (req, res) => {
+  const userId = req.body.user_id;
+  const eventId = req.body.event_id;
+
+  await joinEventAsync(db, eventId, userId);
+  return res.status(201);
+});
+

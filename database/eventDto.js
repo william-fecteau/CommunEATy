@@ -1,4 +1,4 @@
-const { dbAll, dbGet } = require("./sqliteExtensions");
+const { dbAll, dbGet, dbRun} = require("./sqliteExtensions");
 
 async function getMilestonesAsync(bd, eventId) {
   let query =
@@ -43,6 +43,13 @@ async function getFullEventsAsync(bd) {
   return fullEvents;
 }
 
+async function joinEventAsync(bd, eventId, userId) {
+  let insertQuery = `INSERT INTO UsersEvents (fk_userId, fk_eventId) VALUES (?, ?);`
+  await dbRun(bd, insertQuery, [userId, eventId]);
+
+  return await getFullEventAsync(bd, eventId);
+}
+
 function _computeCurPrice(event, milestones, curNbUsers) {
   let curPrice = event.basePrice;
   if (milestones.length > 0) {
@@ -80,4 +87,5 @@ module.exports = {
   getEventsAsync,
   getFullEventAsync,
   getFullEventsAsync,
+  joinEventAsync
 };

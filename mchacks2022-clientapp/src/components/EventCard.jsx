@@ -1,7 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import EventCardProgressBar from "./progressBar/EventCardProgressBar";
+import {UserContext} from "../App";
+import axios from "axios";
+import PrimaryButton from "./PrimaryButton";
 
 function EventCard({event}) {
+    const { user } = useContext(UserContext);
+
     return (
         <div className="m-4 w-56 bg-gray-50 hover:shadow-lg cursor-pointer h-80 rounded-lg flex flex-col">
             <div
@@ -34,9 +39,24 @@ function EventCard({event}) {
                 <div className="mx-4">
                     <EventCardProgressBar event={event}/>
                 </div>
-                <div className="self-center mt-8 border-black border-2 rounded-full px-12 hover:bg-gray-200 font-bold">
-                    Join
-                </div>
+
+            <PrimaryButton onClick={async () => {
+                if (user.username === "") return;
+
+                try {
+                    const { data: response } = await axios.post("/joinEvent", {
+                        user_id: user.pk_id,
+                        event_id: event.pk_id
+                    });
+
+                    console.log(response);
+
+                } catch (e) {
+                    console.log('error when joining the event');
+                    console.log(e);
+                }
+            }}
+            >Join</PrimaryButton>
         </div>
     );
 }
