@@ -1,5 +1,5 @@
 import React from 'react';
-import EventCardProgressBar from "./EventCardProgressBar";
+import EventCardProgressBar from "./progressBar/EventCardProgressBar";
 
 function EventCard({event}) {
     return (
@@ -26,15 +26,13 @@ function EventCard({event}) {
                         })}</div>
                     </div>
 
-                    <div class="flex flex-row justify-between">
-                        <div class="font-bold">Date</div>
-                        <div class="uppercase ml-2">{event.date}</div>
+                    <div className="flex flex-row justify-between">
+                        <div className="font-bold">Date</div>
+                        <div className="uppercase ml-2">{event.date}</div>
                     </div>
                 </div>
-                <div className="mx-4">
-                    TODO <br/>
+                <div className="mx-4 mt-8">
                   <EventCardProgressBar event={event}/>
-                    Progress bar goes here
                 </div>
                 <div className="self-center mt-8 border-black border-2 rounded-full px-12 hover:bg-gray-200 font-bold">
                     Join

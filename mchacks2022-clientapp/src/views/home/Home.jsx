@@ -9,14 +9,16 @@ const demoEvent = {
   ogPrice: 15.00,
   curPrice: 12.00,
   curUsers: 12,
-  maxUsers: 20,
-  eventMilestone: [{
-    minNbUsers: 10,
-    priceDiscount: 0.99
-  }, {
-    minNbUsers: 15,
-    priceDiscount: 1.99
-  },
+  maxUsers: 30,
+  milestones: [
+    {
+      minNbUsers: 10,
+      priceDiscount: 0.99
+    },
+    {
+      minNbUsers: 15,
+      priceDiscount: 1.99
+    },
     {
       minNbUsers: 20,
       priceDiscount: 2.99
