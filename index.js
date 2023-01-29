@@ -28,6 +28,8 @@ app.use(cors({
   origin: "*",
 }));
 
+app.use(express.json());
+
 app.listen(42069, () => {
   console.log("Server started (http://localhost:42069/)! Haha xd so funny");
 });
@@ -35,3 +37,17 @@ app.listen(42069, () => {
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+app.post("/login", (req, res) => {
+  const username = req.body.username;
+  getUserByUsername(db, username, (err, user) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      if (user == undefined) {
+        res.status(404).send("User not found");
+      }
+      res.status(200).send(user);
+    }
+  });
+})

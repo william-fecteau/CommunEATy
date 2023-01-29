@@ -3,6 +3,7 @@ import { Fragment, useContext, useState } from "react";
 import PrimaryButton from "./PrimaryButton";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
+import axios from "axios";
 
 export default function LoginModal({ show, setShow }) {
   const [username, setUsername] = useState("");
@@ -40,7 +41,7 @@ export default function LoginModal({ show, setShow }) {
           <PrimaryButton
             onClick={() => {
               if (username === "") return;
-
+              axios.post("/login", { username: username });
               setShow(false);
               setUser({ username: username });
               navigate("/events");

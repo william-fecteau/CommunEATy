@@ -1,5 +1,5 @@
 function getUserByUsername(bd, username, callback) {
-  let query = "SELECT * FROM users WHERE username = ?";
+  let query = "SELECT * FROM Users WHERE username = ?";
   bd.get(query, [username], callback);
 }
 
