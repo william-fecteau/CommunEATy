@@ -1,4 +1,4 @@
-INSERT INTO Restaurants (restaurantName, restaurantAddress, imageUrl) VALUES ('Tastyburgers', '777 Mc Tavish', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.touchbistro.com%2Fblog%2Fthe-21-coolest-restaurant-logos-weve-ever-seen%2F&psig=AOvVaw09m3QGYbpz0yzGjwdlR4ep&ust=1675035873079000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCJj2kYO56_wCFQAAAAAdAAAAABAE');
+INSERT INTO Restaurants (restaurantName, restaurantAddress, imageUrl) VALUES ('Tastyburgers', '777 Mc Tavish', 'https://www.touchbistro.com/wp-content/uploads/2020/11/restaurant-logo-13.jpg');
 INSERT INTO Restaurants (restaurantName, restaurantAddress, imageUrl) VALUES ('Stove Restaurant', '897 Sherbrooke', 'https://www.logodesign.net/images/home-industry/resturant-logo-04.jpg');
 
 INSERT INTO Users (username, fk_restaurantId) VALUES ('Bob', 1);
