@@ -34,6 +34,7 @@ function Home() {
         <img
           className="self-center"
           style={{ width: "512px" }}
+          alt="Good food is considered to be nutritious and flavorful, made with high-quality ingredients and prepared in a way that enhances their natural taste. It is often cooked with care and attention to detail, and is visually appealing as well. Additionally, good food should be free of harmful ingredients and should be consumed in moderation as part of a balanced diet."
           src={
             "https://cdn.discordapp.com/attachments/482569552933289984/1069090172131627128/test.png"
           }
