@@ -50,12 +50,18 @@ export default function LoginModal({ show, setShow }) {
             />
           </div>
           <PrimaryButton
-            onClick={() => {
+            onClick={async () => {
               if (username === "") return;
-              axios.post("/login", { username: username });
-              setShow(false);
-              setUser({ username: username });
-              navigate("/events");
+
+              try {
+                const { data: response } = await axios.post("/login", {
+                  username: username,
+                });
+
+                setShow(false);
+                setUser(response);
+                navigate("/events");
+              } catch (e) {}
             }}
           >
             Login
