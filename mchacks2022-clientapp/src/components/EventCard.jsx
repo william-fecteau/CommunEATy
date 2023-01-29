@@ -40,23 +40,26 @@ function EventCard({event}) {
                     <EventCardProgressBar event={event}/>
                 </div>
 
-            <PrimaryButton onClick={async () => {
-                if (user.username === "") return;
+            <div className="self-center">
+                <PrimaryButton
+                    onClick={async () => {
+                    if (user.username === "") return;
 
-                try {
-                    const { data: response } = await axios.post("/joinEvent", {
-                        user_id: user.pk_id,
-                        event_id: event.pk_id
-                    });
+                    try {
+                        const { data: response } = await axios.post("/joinEvent", {
+                            user_id: user.pk_id,
+                            event_id: event.pk_id
+                        });
 
-                    console.log(response);
+                        console.log(response);
 
-                } catch (e) {
-                    console.log('error when joining the event');
-                    console.log(e);
-                }
-            }}
-            >Join</PrimaryButton>
+                    } catch (e) {
+                        console.log('error when joining the event');
+                        console.log(e);
+                    }
+                }}
+                >Join</PrimaryButton>
+            </div>
         </div>
     );
 }

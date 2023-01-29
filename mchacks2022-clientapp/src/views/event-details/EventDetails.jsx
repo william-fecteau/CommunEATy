@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import VerticalProgress from "../../components/VerticalProgress";
 import { Icon } from "@iconify/react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import {UserContext} from "../../App";
 
 function EventDetails(props) {
   const { eventId } = useParams();
   const [event, setEvent] = useState(null);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get("/events/" + eventId);
+        const res = await axios.get("/events/" + user.pk_id + "/" + eventId);
         setEvent(res.data);
       } catch (ex) {
         console.error(ex);
@@ -20,7 +22,7 @@ function EventDetails(props) {
   }, [eventId]);
 
   return (
-    <div className="flex ml-32 mt-16 flex-col w-full">
+    <div className="flex ml-32 my-16 flex-col w-full">
       {event && (
         <div className="flex self-center">
           <div className="flex flex-col h-full">

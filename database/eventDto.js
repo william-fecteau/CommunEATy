@@ -14,29 +14,42 @@ async function getCurNbUsersAsync(bd, eventId) {
   return response["curNbUsers"];
 }
 
+async function getUserHasJoined(bd, eventId, userId) {
+  if (userId < 1) {
+    return false
+  }
+
+  let query =
+      "SELECT COUNT(*) AS entry FROM UsersEvents WHERE fk_eventId = ? AND fk_userId = ?";
+  let response = await dbGet(bd, query, [eventId, userId]);
+
+  return response["entry"] > 0;
+}
+
 async function getEventsAsync(bd) {
   let query = "SELECT * FROM Events";
   return await dbAll(bd, query);
 }
 
-async function getFullEventAsync(bd, eventId) {
+async function getFullEventAsync(bd, eventId, userId) {
   let eventQuery = `SELECT * FROM Events INNER JOIN Restaurants R on R.pk_id = Events.fk_restaurantId WHERE Events.pk_id = ?`;
 
   let event = await dbGet(bd, eventQuery, [eventId]);
   let milestones = await getMilestonesAsync(bd, eventId);
   let curNbUsers = await getCurNbUsersAsync(bd, eventId);
+  let hasJoined = await getUserHasJoined(bd, eventId, userId);
 
-  return _mapFullEvent(event, milestones, curNbUsers);
+  return _mapFullEvent(event, milestones, curNbUsers, hasJoined);
 }
 
-async function getFullEventsAsync(bd) {
+async function getFullEventsAsync(bd, userId = null) {
   let eventsQuery = `SELECT Events.pk_id as eventId FROM Events INNER JOIN Restaurants R on R.pk_id = Events.fk_restaurantId`;
 
   let events = await dbAll(bd, eventsQuery);
 
   let fullEvents = [];
   for (let event of events) {
-    let curFullEvent = await getFullEventAsync(bd, event.eventId);
+    let curFullEvent = await getFullEventAsync(bd, event.eventId, userId);
     fullEvents.push({ ...curFullEvent, pk_id: event.eventId });
   }
 
@@ -66,7 +79,7 @@ function _computeCurPrice(event, milestones, curNbUsers) {
   return curPrice;
 }
 
-function _mapFullEvent(event, milestones, curNbUsers) {
+function _mapFullEvent(event, milestones, curNbUsers, hasJoined) {
   return {
     imageUrl: event.imageUrl,
     name: event.restaurantName,
@@ -77,6 +90,7 @@ function _mapFullEvent(event, milestones, curNbUsers) {
     curPrice: _computeCurPrice(event, milestones, curNbUsers),
     curUsers: curNbUsers,
     maxUsers: event.maxNbUsers,
+    hasJoined: hasJoined,
     milestones: milestones,
   };
 }
@@ -85,6 +99,7 @@ module.exports = {
   getMilestonesAsync,
   getCurNbUsersAsync,
   getEventsAsync,
+  getUserHasJoined,
   getFullEventAsync,
   getFullEventsAsync,
   joinEventAsync

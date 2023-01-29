@@ -48,13 +48,13 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.get("/events", async (req, res) => {
-  let fullEvents = await getFullEventsAsync(db);
+app.get("/events/:userId", async (req, res) => {
+  let fullEvents = await getFullEventsAsync(db, req.params.userId);
   return res.status(200).send(fullEvents);
 });
 
-app.get("/events/:eventId", async (req, res) => {
-  let fullEvent = await getFullEventAsync(db, req.params.eventId);
+app.get("/events/:userId/:eventId", async (req, res) => {
+  let fullEvent = await getFullEventAsync(db, req.params.eventId, req.params.userId);
   return res.status(200).send(fullEvent);
 });
 

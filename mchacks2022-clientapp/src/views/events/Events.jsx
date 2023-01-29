@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Icon } from "@iconify/react";
 import EventCard from "../../components/EventCard";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import {UserContext} from "../../App";
 
 function Events() {
   const [events, setEvents] = useState([]);
+  const { user } = useContext(UserContext);
 
   //On mount
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get("/events");
+        const res = await axios.get("/events/" + user.pk_id);
         setEvents(res.data);
       } catch (ex) {
         console.error(ex);
