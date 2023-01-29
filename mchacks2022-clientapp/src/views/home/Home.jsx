@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import PrimaryButton from "../../components/PrimaryButton";
 import LoginModal from "../../components/LoginModal";
 import { useState } from "react";
+import { UserContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -25,7 +29,11 @@ function Home() {
 
           <PrimaryButton
             onClick={() => {
-              setShowLoginModal(true);
+              if (user?.username == null) {
+                setShowLoginModal(true);
+                return;
+              }
+              navigate("/events");
             }}
           >
             Let's eat
