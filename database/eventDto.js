@@ -110,7 +110,7 @@ function _mapFullEvent(
     imageUrl: event.imageUrl,
     name: event.eventName,
     date: event.eventDate,
-    //food: event.eventName,
+    description: event.eventDescription,
     address: event.restaurantAddress,
     ogPrice: event.basePrice,
     curPrice: _computeCurPrice(event, milestones, curNbUsers),
