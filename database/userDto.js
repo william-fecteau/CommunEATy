@@ -10,6 +10,23 @@ async function addFriendAsync(bd, userId1, userId2) {
   await dbRun(bd, query, [userId1, userId2]);
 }
 
+async function getUserById(bd, userId) {
+  let query = "SELECT * FROM Users WHERE pk_id = ?";
+  return await dbGet(bd, query, [userId]);
+}
+
+async function getFriends(db, userId) {
+  let friendIds = await getFriendIds(db, userId);
+
+  let friends = [];
+  for (let friendId of friendIds) {
+    let friend = await getUserById(db, friendId);
+    friends.push(friend);
+  }
+
+  return friends;
+}
+
 async function getFriendIds(bd, userId) {
   let query = "SELECT * FROM Friends WHERE fk_user1Id = ? OR fk_user2Id = ?";
   let results = await dbAll(bd, query, [userId, userId]);
@@ -32,4 +49,5 @@ module.exports = {
   getUserByUsername,
   addFriendAsync,
   getFriendIds,
+  getFriends,
 };

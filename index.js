@@ -4,7 +4,11 @@ const path = require("path");
 const cors = require("cors");
 
 const { createTables, seedData } = require("./database");
-const { getUserByUsername, addFriendAsync } = require("./database/userDto");
+const {
+  getUserByUsername,
+  addFriendAsync,
+  getFriends,
+} = require("./database/userDto");
 const {
   getFullEventsAsync,
   getFullEventAsync,
@@ -70,6 +74,14 @@ app.get("/friends/:user1Id/:username", async (req, res) => {
   await addFriendAsync(db, user1Id, user2.pk_id);
 
   return res.sendStatus(201);
+});
+
+app.get("/friends/:userId/", async (req, res) => {
+  let userId = req.params.userId;
+
+  let friends = await getFriends(db, userId);
+
+  return res.status(200).send(friends);
 });
 
 app.post("/login", async (req, res) => {
