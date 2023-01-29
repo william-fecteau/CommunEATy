@@ -62,7 +62,7 @@ async function getFullEventAsync(bd, eventId, userId) {
   );
 }
 
-async function getFullEventsAsync(bd, userId = null) {
+async function getFullEventsAsync(bd, userId) {
   let eventsQuery = `SELECT Events.pk_id as eventId FROM Events INNER JOIN Restaurants R on R.pk_id = Events.fk_restaurantId`;
 
   let events = await dbAll(bd, eventsQuery);
@@ -74,6 +74,20 @@ async function getFullEventsAsync(bd, userId = null) {
   }
 
   return fullEvents;
+}
+
+async function getJoinedEventsAsync(bd, userId) {
+  let eventsQuery = `SELECT Events.pk_id as eventId FROM Events INNER JOIN UsersEvents UE on Events.pk_id = UE.fk_eventId WHERE fk_userId = ?`;
+
+  let events = await dbAll(bd, eventsQuery, [userId]);
+
+  let joinedEvents = [];
+  for (let event of events) {
+    let curFullEvent = await getFullEventAsync(bd, event.eventId, userId);
+    joinedEvents.push({ ...curFullEvent, pk_id: event.eventId });
+  }
+
+  return joinedEvents;
 }
 
 async function joinEventAsync(bd, eventId, userId) {
@@ -130,4 +144,5 @@ module.exports = {
   getFullEventAsync,
   getFullEventsAsync,
   joinEventAsync,
+  getJoinedEventsAsync
 };

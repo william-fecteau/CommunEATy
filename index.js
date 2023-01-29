@@ -13,6 +13,7 @@ const {
   getFullEventsAsync,
   getFullEventAsync,
   joinEventAsync,
+  getJoinedEventsAsync
 } = require("./database/eventDto");
 
 const db_name = path.join(__dirname, "database", "apptest.db");
@@ -55,6 +56,11 @@ app.get("/", (req, res) => {
 app.get("/events/:userId", async (req, res) => {
   let fullEvents = await getFullEventsAsync(db, req.params.userId);
   return res.status(200).send(fullEvents);
+});
+
+app.get("/events/:userId/joined", async (req, res) => {
+  let joinedEvents = await getJoinedEventsAsync(db, req.params.userId);
+  return res.status(200).send(joinedEvents);
 });
 
 app.get("/events/:userId/:eventId", async (req, res) => {

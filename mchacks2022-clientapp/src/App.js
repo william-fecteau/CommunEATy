@@ -8,6 +8,7 @@ import EventDetails from "./views/event-details/EventDetails";
 import { useState, createContext } from "react";
 import CreateEvent from "./views/create-event/CreateEvent";
 import About from "./views/about/About";
+import Joined from "./views/joined/Joined";
 
 axios.defaults.baseURL = "http://localhost:42069";
 axios.defaults.headers.common["Content-Type"] = "application/json";
@@ -23,6 +24,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/joined" element={<Joined />} />
             <Route path="/events/:eventId" element={<EventDetails />} />
             <Route path="/create-event" element={<CreateEvent />} />
             <Route path="/about" element={<About />} />

@@ -1,13 +1,17 @@
-import {TextInput, Modal, Label} from "flowbite-react";
-import {Fragment, useContext, useState, useEffect} from "react";
+import { TextInput, Modal, Label } from "flowbite-react";
+import { Fragment, useContext, useState, useEffect } from "react";
 import PrimaryButton from "./PrimaryButton";
-import {UserContext} from "../App";
+import { UserContext } from "../App";
 import axios from "axios";
 
-export default function FriendModal({show, setShow}) {
+export default function FriendModal({ show, setShow }) {
   const [friendName, setFriendName] = useState("");
 
-  const {user, setUser} = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+
+  useEffect(() => {
+    setFriendName("");
+  }, [show]);
 
   return (
     <Fragment>
@@ -22,7 +26,7 @@ export default function FriendModal({show, setShow}) {
           <h2 className="text-2xl">Add a friend</h2>
           <div className="w-1/2">
             <div className="mb-2 block">
-              <Label htmlFor="username" value="Friend's username"/>
+              <Label htmlFor="username" value="Friend's username" />
             </div>
             <TextInput
               id="friendName"
@@ -37,8 +41,7 @@ export default function FriendModal({show, setShow}) {
               setShow(false);
               axios
                 .get(`/friends/${user.pk_id}/${friendName}`)
-                .then((res) => {
-                });
+                .then((res) => {});
             }}
           >
             Add friend
