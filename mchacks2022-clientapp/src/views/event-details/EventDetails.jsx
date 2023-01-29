@@ -7,6 +7,8 @@ const event =  {
         "https://image.similarpng.com/very-thumbnail/2020/06/Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png",
     name: "Rabais Spaghetti",
     date: "2023-01-29",
+    address: "1234 lol street",
+    description: "this is good meal for good stuff",
     ogPrice: 150,
     curPrice: 12,
     curUsers: 22,
@@ -49,12 +51,12 @@ function EventDetails(props) {
                         <div className="uppercase">{event.date}</div>
                     </div>
                     <div className="flex flex-col my-2">
-                        <div className="font-bold">Food</div>
-                        <div className="uppercase">{event.food}</div>
-                    </div>
-                    <div className="flex flex-col my-2">
                         <div className="font-bold">Address</div>
                         <div className="uppercase">{event.address}</div>
+                    </div>
+                    <div className="flex flex-col my-2">
+                        <div className="font-bold">Description</div>
+                        <div>{event.description}</div>
                     </div>
 
                     <button className="flex items-center w-32 mt-8 bg-primary hover:bg-green-400 pl-10 py-2 hover:shadow rounded font-semibold">

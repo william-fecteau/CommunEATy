@@ -7,6 +7,7 @@ import Events from "./views/events/Events";
 import EventDetails from "./views/event-details/EventDetails";
 import { useState, createContext } from "react";
 import CreateEvent from "./views/create-event/CreateEvent";
+import About from "./views/about/About";
 
 axios.defaults.baseURL = "http://localhost:42069";
 axios.defaults.headers.common["Content-Type"] = "application/json";
@@ -24,6 +25,7 @@ function App() {
             <Route path="/events" element={<Events />} />
             <Route path="/create-event" element={<CreateEvent />} />
             <Route path="/details" element={<EventDetails />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </Layout>
       </UserContext.Provider>
