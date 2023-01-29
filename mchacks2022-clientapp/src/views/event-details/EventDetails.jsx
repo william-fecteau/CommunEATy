@@ -34,7 +34,7 @@ function EventDetails(props) {
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
                 backgroundSize: "cover",
-                backgroundImage: `url(${event.imageUrl})`,
+                backgroundImage: `url(${event.imageUrl ? event.imageUrl : 'https://cdn.discordapp.com/attachments/1040028766228971560/1069011173623738479/restaurant1.jpg'})`
               }}
               className="w-96 h-32 self-center"
             />
