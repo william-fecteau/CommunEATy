@@ -8,10 +8,10 @@ export default function AppHeader() {
         className="font-semibold text-2xl flex justify-between align-middle p-4"
       >
         <div>
-          Commun<span className="text-green">EAT</span>y
+          Commun<span className="text-primary">EAT</span>y
         </div>
         <div
-          className="text-navGreen text-base cursor-pointer hover:text-green"
+          className="text-navGreen text-base cursor-pointer hover:text-primary"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
         >

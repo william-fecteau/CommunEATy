@@ -1,3 +1,12 @@
+import { TextInput } from "flowbite-react";
+
 export default function Login() {
-  return <div className="page"></div>;
+  return (
+    <TextInput
+      id="email1"
+      type="email"
+      placeholder="name@flowbite.com"
+      required={true}
+    />
+  );
 }
