@@ -12,7 +12,6 @@ function Events() {
     (async () => {
       try {
         const res = await axios.get("/events");
-        console.log(res);
         setEvents(res.data);
       } catch (ex) {
         console.error(ex);
@@ -26,14 +25,15 @@ function Events() {
         <div className="text-3xl mr-8">Nearby Events</div>
         <Link
           className="hover:cursor-pointer flex items-center bg-green-500 hover:bg-green-400 hover:shadow pl-2 pr-4 rounded font-semibold"
-          to="/create-event">
-          <Icon icon="ic:baseline-plus" width="32px"/>
+          to="/create-event"
+        >
+          <Icon icon="ic:baseline-plus" width="32px" />
           Event
         </Link>
       </div>
       <div className="flex flex-wrap max-w-6xl">
         {events.map((event) => (
-          <Link to="/details">
+          <Link key={event.pk_id} to={"/events/" + event.pk_id}>
             <EventCard event={event} />
           </Link>
         ))}

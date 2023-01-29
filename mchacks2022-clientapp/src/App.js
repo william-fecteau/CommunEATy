@@ -23,8 +23,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/events/:eventId" element={<EventDetails />} />
             <Route path="/create-event" element={<CreateEvent />} />
-            <Route path="/details" element={<EventDetails />} />
             <Route path="/about" element={<About />} />
           </Routes>
         </Layout>

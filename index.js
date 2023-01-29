@@ -5,7 +5,10 @@ const cors = require("cors");
 
 const { createTables, seedData } = require("./database");
 const { getUserByUsername } = require("./database/userDto");
-const { getFullEventsAsync } = require("./database/eventDto");
+const {
+  getFullEventsAsync,
+  getFullEventAsync,
+} = require("./database/eventDto");
 
 const db_name = path.join(__dirname, "database", "apptest.db");
 const db = new sqlite3.Database(db_name, (err) => {
@@ -47,6 +50,11 @@ app.get("/", (req, res) => {
 app.get("/events", async (req, res) => {
   let fullEvents = await getFullEventsAsync(db);
   return res.status(200).send(fullEvents);
+});
+
+app.get("/events/:eventId", async (req, res) => {
+  let fullEvent = await getFullEventAsync(db, req.params.eventId);
+  return res.status(200).send(fullEvent);
 });
 
 app.post("/login", (req, res) => {

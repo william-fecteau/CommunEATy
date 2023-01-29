@@ -37,7 +37,7 @@ async function getFullEventsAsync(bd) {
   let fullEvents = [];
   for (let event of events) {
     let curFullEvent = await getFullEventAsync(bd, event.eventId);
-    fullEvents.push(curFullEvent);
+    fullEvents.push({ ...curFullEvent, pk_id: event.eventId });
   }
 
   return fullEvents;
