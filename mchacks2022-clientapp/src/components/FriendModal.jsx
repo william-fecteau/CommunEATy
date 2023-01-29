@@ -7,7 +7,7 @@ import axios from "axios";
 export default function FriendModal({ show, setShow }) {
   const [friendName, setFriendName] = useState("");
 
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   return (
     <Fragment>
@@ -17,9 +17,9 @@ export default function FriendModal({ show, setShow }) {
           setShow(false);
         }}
       >
-        <Modal.Header>Login</Modal.Header>
+        <Modal.Header>Account</Modal.Header>
         <Modal.Body>
-          <h2>Add a friend</h2>
+          <h2 className="text-2xl">Add a friend</h2>
           <div className="w-1/2">
             <div className="mb-2 block">
               <Label htmlFor="username" value="Friend's username" />
@@ -32,7 +32,15 @@ export default function FriendModal({ show, setShow }) {
             />
           </div>
 
-          <PrimaryButton onClick={async () => {}}>Login</PrimaryButton>
+          <PrimaryButton
+            onClick={async () => {
+              axios
+                .get(`/friends/${user.pk_id}/${friendName}`)
+                .then((res) => {});
+            }}
+          >
+            Ajouter en ami
+          </PrimaryButton>
         </Modal.Body>
       </Modal>
     </Fragment>

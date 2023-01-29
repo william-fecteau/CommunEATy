@@ -4,11 +4,11 @@ const path = require("path");
 const cors = require("cors");
 
 const { createTables, seedData } = require("./database");
-const { getUserByUsername } = require("./database/userDto");
+const { getUserByUsername, addFriendAsync } = require("./database/userDto");
 const {
   getFullEventsAsync,
   getFullEventAsync,
-  joinEventAsync
+  joinEventAsync,
 } = require("./database/eventDto");
 
 const db_name = path.join(__dirname, "database", "apptest.db");
@@ -54,22 +54,33 @@ app.get("/events/:userId", async (req, res) => {
 });
 
 app.get("/events/:userId/:eventId", async (req, res) => {
-  let fullEvent = await getFullEventAsync(db, req.params.eventId, req.params.userId);
+  let fullEvent = await getFullEventAsync(
+    db,
+    req.params.eventId,
+    req.params.userId
+  );
   return res.status(200).send(fullEvent);
 });
 
-app.post("/login", (req, res) => {
+app.get("/friends/:user1Id/:username", async (req, res) => {
+  let user1Id = req.params.user1Id;
+  let username = req.params.username;
+
+  let user2 = await getUserByUsername(db, username);
+  await addFriendAsync(db, user1Id, user2.pk_id);
+
+  return res.sendStatus(201);
+});
+
+app.post("/login", async (req, res) => {
   const username = req.body.username;
-  getUserByUsername(db, username, (err, user) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      if (user == undefined) {
-        res.status(404).send("User not found");
-      }
-      res.status(200).send(user);
-    }
-  });
+
+  let user = await getUserByUsername(db, username);
+  if (user == undefined) {
+    res.status(404).send("User not found");
+  }
+
+  res.status(200).send(user);
 });
 
 app.post("/joinEvent", async (req, res) => {
@@ -79,4 +90,3 @@ app.post("/joinEvent", async (req, res) => {
   await joinEventAsync(db, eventId, userId);
   return res.status(201);
 });
-

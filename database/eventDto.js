@@ -1,4 +1,5 @@
-const { dbAll, dbGet, dbRun} = require("./sqliteExtensions");
+const { dbAll, dbGet, dbRun } = require("./sqliteExtensions");
+const { getFriendIds } = require("./userDto");
 
 async function getMilestonesAsync(bd, eventId) {
   let query =
@@ -16,11 +17,11 @@ async function getCurNbUsersAsync(bd, eventId) {
 
 async function getUserHasJoined(bd, eventId, userId) {
   if (userId < 1) {
-    return false
+    return false;
   }
 
   let query =
-      "SELECT COUNT(*) AS entry FROM UsersEvents WHERE fk_eventId = ? AND fk_userId = ?";
+    "SELECT COUNT(*) AS entry FROM UsersEvents WHERE fk_eventId = ? AND fk_userId = ?";
   let response = await dbGet(bd, query, [eventId, userId]);
 
   return response["entry"] > 0;
@@ -31,6 +32,18 @@ async function getEventsAsync(bd) {
   return await dbAll(bd, query);
 }
 
+async function getNbFriendsGoing(bd, eventId, userId) {
+  let friendsIds = await getFriendIds(bd, userId);
+
+  let placeholders = friendsIds.map(() => "?").join(",");
+  let query = `SELECT COUNT(*) AS entry FROM UsersEvents WHERE fk_userId IN (${placeholders}) AND fk_eventId=?`;
+  friendsIds.push(eventId);
+
+  let result = await dbGet(bd, query, friendsIds);
+
+  return result["entry"];
+}
+
 async function getFullEventAsync(bd, eventId, userId) {
   let eventQuery = `SELECT * FROM Events INNER JOIN Restaurants R on R.pk_id = Events.fk_restaurantId WHERE Events.pk_id = ?`;
 
@@ -38,8 +51,15 @@ async function getFullEventAsync(bd, eventId, userId) {
   let milestones = await getMilestonesAsync(bd, eventId);
   let curNbUsers = await getCurNbUsersAsync(bd, eventId);
   let hasJoined = await getUserHasJoined(bd, eventId, userId);
+  let nbFriendsGoing = await getNbFriendsGoing(bd, eventId, userId);
 
-  return _mapFullEvent(event, milestones, curNbUsers, hasJoined);
+  return _mapFullEvent(
+    event,
+    milestones,
+    curNbUsers,
+    hasJoined,
+    nbFriendsGoing
+  );
 }
 
 async function getFullEventsAsync(bd, userId = null) {
@@ -57,7 +77,7 @@ async function getFullEventsAsync(bd, userId = null) {
 }
 
 async function joinEventAsync(bd, eventId, userId) {
-  let insertQuery = `INSERT INTO UsersEvents (fk_userId, fk_eventId) VALUES (?, ?);`
+  let insertQuery = `INSERT INTO UsersEvents (fk_userId, fk_eventId) VALUES (?, ?);`;
   await dbRun(bd, insertQuery, [userId, eventId]);
 
   return await getFullEventAsync(bd, eventId);
@@ -79,12 +99,18 @@ function _computeCurPrice(event, milestones, curNbUsers) {
   return curPrice;
 }
 
-function _mapFullEvent(event, milestones, curNbUsers, hasJoined) {
+function _mapFullEvent(
+  event,
+  milestones,
+  curNbUsers,
+  hasJoined,
+  nbFriendsGoing
+) {
   return {
     imageUrl: event.imageUrl,
-    name: event.restaurantName,
+    name: event.eventName,
     date: event.eventDate,
-    food: event.eventName,
+    //food: event.eventName,
     address: event.restaurantAddress,
     ogPrice: event.basePrice,
     curPrice: _computeCurPrice(event, milestones, curNbUsers),
@@ -92,6 +118,7 @@ function _mapFullEvent(event, milestones, curNbUsers, hasJoined) {
     maxUsers: event.maxNbUsers,
     hasJoined: hasJoined,
     milestones: milestones,
+    nbFriendsGoing: nbFriendsGoing,
   };
 }
 
@@ -102,5 +129,5 @@ module.exports = {
   getUserHasJoined,
   getFullEventAsync,
   getFullEventsAsync,
-  joinEventAsync
+  joinEventAsync,
 };

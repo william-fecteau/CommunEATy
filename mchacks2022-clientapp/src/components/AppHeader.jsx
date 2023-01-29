@@ -59,8 +59,7 @@ export default function AppHeader() {
             <div
               className="text-navGreen text-base cursor-pointer hover:text-primary"
               onClick={() => {
-                setUser({ username: null });
-                navigate("/");
+                setShowFriendModal(true);
               }}
             >
               <Icon icon="bi:people-circle" className="inline mr-1" />
