@@ -41,8 +41,8 @@ function EventDetails(props) {
                         <div className="uppercase">{event.address}</div>
                     </div>
 
-                    <button className="flex items-center w-32 mt-8 bg-primary hover:bg-green-400 pl-6 hover:shadow rounded font-semibold">
-                        <Icon icon={"ic:baseline-plus"} width="32px"/>
+                    <button className="flex items-center w-32 mt-8 bg-primary hover:bg-green-400 pl-10 py-2 hover:shadow rounded font-semibold">
+                        <Icon icon={"ic:baseline-plus"} width="16px"/>
                         Join
                     </button>
                 </div>
