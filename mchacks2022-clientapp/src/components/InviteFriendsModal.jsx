@@ -35,7 +35,7 @@ function InviteFriendsModal({show, setShow}) {
   return (
     <>
       <Modal
-        show={show}
+        show={show && friends.length > 0}
         onClose={() => {
           setShow(false);
         }}
