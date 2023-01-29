@@ -38,7 +38,7 @@ const events = [
     date: "2023-01-29",
     ogPrice: 150,
     curPrice: 12,
-    curUsers: 5,
+    curUsers: 30,
     maxUsers: 30,
     milestones: [
       {
