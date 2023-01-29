@@ -1,14 +1,23 @@
 import { Icon } from "@iconify/react";
 import LoginModal from "./LoginModal";
-import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { UserContext } from "../App";
+import FriendModal from "./FriendModal";
 
 export default function AppHeader() {
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showFriendModal, setShowFriendModal] = useState(false);
   const { user, setUser } = useContext(UserContext);
 
+  const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location?.pathname !== "/" && user?.username === null) {
+      navigate("/");
+    }
+  }, [location.pathname, user]);
 
   return (
     <>
@@ -61,6 +70,7 @@ export default function AppHeader() {
         )}
       </nav>
       <LoginModal show={showLoginModal} setShow={setShowLoginModal} />
+      <FriendModal show={showFriendModal} setShow={setShowFriendModal} />
     </>
   );
 }

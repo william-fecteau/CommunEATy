@@ -38,3 +38,11 @@ CREATE TABLE IF NOT EXISTS EventMilestone  (
     fk_eventId INT NOT NULL,
     FOREIGN KEY (fk_eventId) REFERENCES Events(pk_id)
 );
+
+CREATE TABLE IF NOT EXISTS UsersFriends (
+    pk_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fk_user1Id INT NOT NULL,
+    fk_user2Id INT NOT NULL,
+    FOREIGN KEY (fk_user1Id) REFERENCES Users(pk_id),
+    FOREIGN KEY (fk_user2Id) REFERENCES Users(pk_id)
+);
