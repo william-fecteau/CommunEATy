@@ -1,6 +1,7 @@
 import React from 'react';
 import {Icon} from "@iconify/react";
 import EventCard from "../../components/EventCard";
+import {Link} from "react-router-dom";
 
 const events = [
     {
@@ -88,7 +89,11 @@ function Events(props) {
                 </button>
             </div>
             <div className="flex flex-wrap max-w-6xl">
-                {events.map(event => (<EventCard event={event}/> ))}
+                {events.map(event => (
+                    <Link to='/details'>
+                        <EventCard event={event}/>
+                    </Link>
+                     ))}
             </div>
 
         </div>
