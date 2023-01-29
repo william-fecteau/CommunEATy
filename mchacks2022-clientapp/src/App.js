@@ -7,11 +7,9 @@ import Events from "./views/events/Events";
 import EventDetails from "./views/event-details/EventDetails";
 import { useState, createContext } from "react";
 
-// axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 axios.defaults.baseURL = "http://localhost:42069";
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
-axios.get("/").then((res) => console.log(res.data));
 export const UserContext = createContext();
 
 function App() {
