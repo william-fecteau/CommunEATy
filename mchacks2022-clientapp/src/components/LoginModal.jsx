@@ -1,5 +1,5 @@
 import { TextInput, Modal, Label } from "flowbite-react";
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useState, useEffect } from "react";
 import PrimaryButton from "./PrimaryButton";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
@@ -7,9 +7,15 @@ import axios from "axios";
 
 export default function LoginModal({ show, setShow }) {
   const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
+
+  useEffect(() => {
+    setUsername("");
+    setPassword("");
+  }, [show]);
 
   return (
     <Fragment>
@@ -36,7 +42,12 @@ export default function LoginModal({ show, setShow }) {
             <div className="mb-2 block">
               <Label htmlFor="password" value="Password" />
             </div>
-            <TextInput id="password" type="password" />
+            <TextInput
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
           <PrimaryButton
             onClick={() => {
