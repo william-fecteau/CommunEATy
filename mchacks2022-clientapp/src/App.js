@@ -3,7 +3,7 @@ import Layout from "./views/Layout";
 import { Routes, Route } from "react-router-dom";
 import Home from "./views/home/Home";
 import Welcome from "./views/welcome/Welcome";
-import Login from "./views/login/Login";
+import Events from "./views/events/Events";
 
 function App() {
   return (
@@ -11,8 +11,8 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/events" element={<Events />} />
           <Route path="/welcome" element={<Welcome />} />
-          <Route path="/login" element={<Login />} />
         </Routes>
       </Layout>
     </>
