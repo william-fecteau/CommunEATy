@@ -9,7 +9,7 @@ function EventCard({ event }) {
   const { user } = useContext(UserContext);
 
   return (
-    <div className="m-4 w-56 bg-gray-50 hover:shadow-lg cursor-pointer h-80 rounded-lg flex flex-col">
+    <div className="m-4 w-56 bg-gray-50 hover:shadow-lg cursor-pointer h-96 rounded-lg flex flex-col">
       <div
         style={{
           backgroundRepeat: "no-repeat",
@@ -44,7 +44,11 @@ function EventCard({ event }) {
       <div className="mx-4">
         <EventCardProgressBar event={event} />
       </div>
-      {event.nbFriendsGoing > 0 && <div flex flex-row justify-between>{event.nbFriendsGoing} FRIENDS GOING</div>}
+      <div flex flex-row justify-between className="mx-4">
+        {event.nbFriendsGoing > 0
+          ? `${event.nbFriendsGoing} friend(s) going`
+          : "."}
+      </div>
 
       <div className="self-center">
         <JoinedButton event={event} />
