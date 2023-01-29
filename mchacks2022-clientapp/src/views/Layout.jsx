@@ -1,24 +1,11 @@
-import React from 'react';
-import {Icon} from "@iconify/react";
+import React from "react";
+import AppHeader from "../components/AppHeader";
 
-function Layout({children}) {
+function Layout({ children }) {
   return (
-    <div className="flex-row h-full">
-      <div className="">
-
-        <div style={{fontFamily: "Poppins"}} className="inline-block mr-auto font-semibold text-2xl w-full">Commun<span
-          className="text-green-400">EAT</span>y
-        </div>
-
-        <div className="inline-block">
-          <button><Icon icon="bi:people-circle"/> Login</button>
-          <button>Login</button>
-          <button>Login</button>
-        </div>
-
-
-      </div>
-      <div className="min-h-full">{children}</div>
+    <div className="flex flex-col h-full">
+      <AppHeader />
+      <div className="min-h-full px-2 max-w-4xl self-center">{children}</div>
     </div>
   );
 }
