@@ -1,4 +1,5 @@
-# CommunEATy (McHacks 10)
+# CommunEATy
+This app was made in 24h during McHacks 10
 ![CommunEATy logo](./mchacks2022-clientapp/public/logo192.png)
 
 Check out the [DevPost](https://devpost.com/software/communeaty-rx3t9b?ref_content=user-portfolio&ref_feature=in_progress)!
